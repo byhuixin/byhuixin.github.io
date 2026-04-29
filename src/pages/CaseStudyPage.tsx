@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { Footer } from "../components/Footer";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
@@ -19,14 +19,21 @@ export const CaseStudyPage = (): JSX.Element => {
     return (
       <div className="page" style={{ padding: "120px 0", textAlign: "center" }}>
         <p>Case study not found.</p>
-        <Link to="/portfolio" className="btn btn--primary" style={{ marginTop: "1rem" }}>
-          Back to Portfolio
-        </Link>
+        <button
+          type="button"
+          className="btn btn--primary"
+          style={{ marginTop: "1rem" }}
+          onClick={() => navigate("/#portfolio")}
+        >
+          Back to Featured Work
+        </button>
       </div>
     );
   }
 
-  const currentIndex = caseStudies.findIndex((item) => item.slug === caseStudy.slug);
+  const currentIndex = caseStudies.findIndex(
+    (item) => item.slug === caseStudy.slug,
+  );
   const nextStudy = caseStudies[(currentIndex + 1) % caseStudies.length];
 
   return (
@@ -37,7 +44,13 @@ export const CaseStudyPage = (): JSX.Element => {
           <div className="blob blob--hero-2" />
         </div>
         <div className="container cs-detail-hero__content">
-          <button type="button" className="back-btn" onClick={() => navigate("/portfolio")}>← All Work</button>
+          <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate("/#portfolio")}
+          >
+            ← Featured Work
+          </button>
           <div className="cs-tags" style={{ marginBottom: "var(--space-sm)" }}>
             {caseStudy.tags.map((tag) => (
               <span key={tag} className="cs-tag">
@@ -49,14 +62,21 @@ export const CaseStudyPage = (): JSX.Element => {
           <p className="cs-detail-hero__subtitle">{caseStudy.subtitle}</p>
         </div>
       </div>
-      <div className="cs-detail-cover" style={{ background: caseStudy.coverColor }} aria-hidden="true" />
+      <div
+        className="cs-detail-cover"
+        style={{ background: caseStudy.coverColor }}
+        aria-hidden="true"
+      />
       <section className="section section-wrapper">
         <div className="blob-layer" aria-hidden="true">
           <div className="blob blob--exp-1" />
         </div>
         <div className="container">
           <p className="portfolio__lead">{caseStudy.lead}</p>
-          <div className="pf-two-col" style={{ marginBottom: "var(--space-xl)" }}>
+          <div
+            className="pf-two-col"
+            style={{ marginBottom: "var(--space-xl)" }}
+          >
             <div className="pf-card pf-card--muted">
               <p className="pf-card__label">The Problem</p>
               <p className="pf-card__body">{caseStudy.problem}</p>
@@ -66,7 +86,10 @@ export const CaseStudyPage = (): JSX.Element => {
               <p className="pf-card__body">{caseStudy.goal}</p>
             </div>
           </div>
-          <div className="pf-card pf-card--muted" style={{ marginBottom: "var(--space-xl)" }}>
+          <div
+            className="pf-card pf-card--muted"
+            style={{ marginBottom: "var(--space-xl)" }}
+          >
             <p className="pf-card__label">Why This Matters</p>
             <p className="pf-card__body">{caseStudy.whyItMatters}</p>
           </div>
@@ -147,7 +170,11 @@ export const CaseStudyPage = (): JSX.Element => {
           </div>
           <div className="cs-next">
             <p className="sec-label">Next Project</p>
-            <button type="button" className="btn btn--primary" onClick={() => navigate(`/case-study/${nextStudy.slug}`)}>
+            <button
+              type="button"
+              className="btn btn--primary"
+              onClick={() => navigate(`/case-study/${nextStudy.slug}`)}
+            >
               {nextStudy.title} →
             </button>
           </div>

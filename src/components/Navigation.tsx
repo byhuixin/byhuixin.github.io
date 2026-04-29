@@ -8,11 +8,6 @@ export const Navigation = (): JSX.Element => (
       </NavLink>
       <ul className="nav__menu">
         <li>
-          <NavLink to="/portfolio" className="nav__link nav__link--btn">
-            Works
-          </NavLink>
-        </li>
-        <li>
           <NavLink to="/#about" className="nav__link">
             About
           </NavLink>

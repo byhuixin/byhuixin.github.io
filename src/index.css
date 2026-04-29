@@ -112,100 +112,135 @@ p {
 .blob {
   position: absolute;
   opacity: 0;
-  will-change: transform, border-radius;
-  transition: opacity 1.2s ease;
+  pointer-events: none;
+  will-change: transform, border-radius, opacity;
+  transition: opacity 1.2s ease, transform 0.35s ease, border-radius 0.35s ease;
+  transform-origin: center;
 }
 
 .blob.blob--visible {
   opacity: 1;
+  pointer-events: auto;
+}
+
+.blob--hero-1.blob--visible:hover {
+  animation: floatHero1 18s ease-in-out infinite alternate, floatHover 1.4s ease-in-out infinite alternate;
+}
+
+.blob--hero-2.blob--visible:hover {
+  animation: floatHero2 16s ease-in-out infinite alternate, floatHover 1.4s ease-in-out infinite alternate;
+}
+
+.blob--contact-1.blob--visible:hover {
+  animation: floatContact1 14s ease-in-out infinite alternate, floatHover 1.4s ease-in-out infinite alternate;
+}
+
+.blob--contact-2.blob--visible:hover {
+  animation: floatContact2 20s ease-in-out infinite alternate, floatHover 1.4s ease-in-out infinite alternate;
 }
 
 /* ── Hero blobs ─────────────────────────────── */
 
 .blob--hero-1 {
-  width: 540px;
-  height: 440px;
+  width: 520px;
+  height: 430px;
   background: #F0EFE6;
   opacity: 0;
   top: -80px;
   left: -140px;
-  border-radius: 62% 38% 50% 50% / 55% 45% 60% 40%;
-  animation: wiggleHero1 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  border-radius: 44% 56% 52% 48% / 55% 48% 52% 45%;
+  animation: floatHero1 18s ease-in-out infinite alternate;
 }
 .blob--hero-1.blob--visible { opacity: 0.58; }
 
 .blob--hero-2 {
-  width: 420px;
-  height: 300px;
+  width: 400px;
+  height: 340px;
   background: #DCCFC1;
   opacity: 0;
   bottom: -60px;
   right: -100px;
-  border-radius: 38% 62% 55% 45% / 48% 52% 42% 58%;
-  animation: wiggleHero2 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation-delay: -5s;
+  border-radius: 50% 50% 48% 52% / 52% 44% 56% 48%;
   z-index: 2;
+  animation: floatHero2 16s ease-in-out infinite alternate;
 }
 .blob--hero-2.blob--visible { opacity: 0.46; }
 
 /* ── Contact blobs ───────────────────────────── */
 
 .blob--contact-1 {
-  width: 420px;
-  height: 300px;
+  width: 400px;
+  height: 320px;
   background: #DCCFC1;
   opacity: 0;
   top: -80px;
   right: -100px;
-  border-radius: 58% 42% 45% 55% / 48% 52% 60% 40%;
-  animation: wiggleContact1 14s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation-delay: -3s;
+  border-radius: 46% 54% 50% 50% / 48% 55% 45% 52%;
+  animation: floatContact1 14s ease-in-out infinite alternate;
 }
 .blob--contact-1.blob--visible { opacity: 0.42; }
 
 .blob--contact-2 {
-  width: 280px;
-  height: 480px;
+  width: 320px;
+  height: 420px;
   background: #C6C9D2;
   opacity: 0;
   bottom: -120px;
   left: -110px;
-  border-radius: 45% 55% 38% 62% / 60% 40% 65% 35%;
-  animation: wiggleContact2 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation-delay: -8s;
+  border-radius: 52% 48% 46% 54% / 44% 52% 48% 56%;
+  animation: floatContact2 20s ease-in-out infinite alternate;
 }
 .blob--contact-2.blob--visible { opacity: 0.32; }
 
 /* ─────────────────────────────────────────────
-   WIGGLE KEYFRAMES
+   FLOAT AND HOVER KEYFRAMES
 ───────────────────────────────────────────── */
-@keyframes wiggleHero1 {
-  0%   { transform: scale(1)     skew(0deg,    0deg);    border-radius: 62% 38% 50% 50% / 55% 45% 60% 40%; }
-  25%  { transform: scale(1.014) skew(0.7deg,  0.3deg);  border-radius: 58% 42% 54% 46% / 52% 48% 56% 44%; }
-  55%  { transform: scale(1.026) skew(-0.5deg, 0.7deg);  border-radius: 52% 48% 63% 37% / 44% 56% 50% 50%; }
-  80%  { transform: scale(1.01)  skew(0.9deg, -0.4deg);  border-radius: 60% 40% 46% 54% / 58% 42% 65% 35%; }
-  100% { transform: scale(0.988) skew(-0.4deg, -0.3deg); border-radius: 66% 34% 52% 48% / 50% 50% 58% 42%; }
+@keyframes floatHero1 {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1);
+         border-radius: 44% 56% 52% 48% / 55% 48% 52% 45%; }
+  50%  { transform: translate(16px, -12px) rotate(0.4deg) scale(1.02);
+         border-radius: 48% 52% 50% 50% / 52% 50% 50% 48%; }
+  100% { transform: translate(-12px, 18px) rotate(-0.4deg) scale(0.98);
+         border-radius: 46% 54% 54% 46% / 56% 46% 54% 44%; }
 }
-@keyframes wiggleHero2 {
-  0%   { transform: scale(1)     skew(0deg,    0deg);    border-radius: 38% 62% 55% 45% / 48% 52% 42% 58%; }
-  30%  { transform: scale(1.018) skew(-0.6deg, 0.4deg);  border-radius: 44% 56% 48% 52% / 54% 46% 48% 52%; }
-  60%  { transform: scale(1.03)  skew(0.8deg, -0.6deg);  border-radius: 52% 48% 40% 60% / 42% 58% 54% 46%; }
-  85%  { transform: scale(1.01)  skew(0.4deg,  0.5deg);  border-radius: 36% 64% 58% 42% / 50% 50% 40% 60%; }
-  100% { transform: scale(0.99)  skew(-0.3deg, -0.5deg); border-radius: 42% 58% 52% 48% / 46% 54% 46% 54%; }
+
+@keyframes floatHero2 {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1);
+         border-radius: 50% 50% 48% 52% / 52% 44% 56% 48%; }
+  50%  { transform: translate(-12px, 14px) rotate(0.5deg) scale(1.02);
+         border-radius: 52% 48% 50% 50% / 50% 48% 52% 50%; }
+  100% { transform: translate(12px, -14px) rotate(-0.5deg) scale(0.98);
+         border-radius: 48% 52% 46% 54% / 54% 46% 50% 50%; }
 }
-@keyframes wiggleContact1 {
-  0%   { transform: scale(1)     skew(0deg,    0deg);    border-radius: 58% 42% 45% 55% / 48% 52% 60% 40%; }
-  25%  { transform: scale(1.016) skew(0.5deg,  0.6deg);  border-radius: 54% 46% 50% 50% / 44% 56% 55% 45%; }
-  55%  { transform: scale(1.03)  skew(-0.6deg, 0.5deg);  border-radius: 48% 52% 58% 42% / 52% 48% 44% 56%; }
-  80%  { transform: scale(1.01)  skew(0.8deg, -0.5deg);  border-radius: 62% 38% 42% 58% / 46% 54% 58% 42%; }
-  100% { transform: scale(0.988) skew(-0.4deg, -0.4deg); border-radius: 50% 50% 50% 50% / 54% 46% 50% 50%; }
+
+@keyframes floatContact1 {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1);
+         border-radius: 46% 54% 50% 50% / 48% 55% 45% 52%; }
+  50%  { transform: translate(18px, -14px) rotate(0.5deg) scale(1.02);
+         border-radius: 50% 50% 52% 48% / 52% 50% 48% 50%; }
+  100% { transform: translate(-14px, 12px) rotate(-0.5deg) scale(0.98);
+         border-radius: 44% 56% 48% 52% / 50% 52% 46% 54%; }
 }
-@keyframes wiggleContact2 {
-  0%   { transform: scale(1)     skew(0deg,    0deg);    border-radius: 45% 55% 38% 62% / 60% 40% 65% 35%; }
-  25%  { transform: scale(1.014) skew(-0.5deg, 0.4deg);  border-radius: 50% 50% 44% 56% / 54% 46% 60% 40%; }
-  55%  { transform: scale(1.026) skew(0.7deg, -0.5deg);  border-radius: 40% 60% 50% 50% / 64% 36% 55% 45%; }
-  80%  { transform: scale(1.008) skew(-0.3deg, 0.6deg);  border-radius: 48% 52% 35% 65% / 58% 42% 68% 32%; }
-  100% { transform: scale(0.986) skew(0.4deg,  0.2deg);  border-radius: 42% 58% 44% 56% / 62% 38% 60% 40%; }
+
+@keyframes floatContact2 {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1);
+         border-radius: 52% 48% 46% 54% / 44% 52% 48% 56%; }
+  50%  { transform: translate(-16px, 18px) rotate(0.4deg) scale(1.02);
+         border-radius: 48% 52% 50% 50% / 48% 50% 52% 50%; }
+  100% { transform: translate(14px, -16px) rotate(-0.4deg) scale(0.98);
+         border-radius: 54% 46% 48% 52% / 46% 54% 46% 54%; }
+}
+
+@keyframes wiggleHover {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(2px, -2px) rotate(0.7deg) scale(1.01);
+  }
+  100% {
+    transform: translate(-2px, 2px) rotate(-0.7deg) scale(0.99);
+  }
 }
 
 /* Navigation */
@@ -741,7 +776,7 @@ p {
 .exp-row.visible { opacity: 1; transform: translateY(0); }
 .exp-row:nth-child(2) { transition-delay: 0.1s; }
 .exp-row:nth-child(3) { transition-delay: 0.2s; }
-
+ 
 .exp-dot {
   position: absolute;
   left: calc(var(--timeline-left-col) - var(--timeline-dot-size) / 2);
@@ -768,7 +803,7 @@ p {
   padding-right: var(--space-md);
 }
 .exp-body { grid-area: body; }
-
+ 
 .exp-trigger {
   display: flex;
   align-items: center;
@@ -814,7 +849,7 @@ p {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
 }
 .exp-row.open .exp-chevron { transform: rotate(180deg); color: var(--primary-warm); }
-
+ 
 .exp-panel {
   display: grid;
   grid-template-rows: 0fr;
@@ -823,7 +858,7 @@ p {
 .exp-panel--open { grid-template-rows: 1fr; }
 .exp-panel-inner { overflow: hidden; }
 .exp-panel-content { padding-top: var(--space-md); }
-
+ 
 .exp-desc {
   font-size: 1.05rem;
   color: var(--neutral-charcoal);

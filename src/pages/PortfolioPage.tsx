@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { CaseStudyCard } from "../components/CaseStudyCard";
 import { Footer } from "../components/Footer";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 
 export const PortfolioPage = (): JSX.Element => {
+  const navigate = useNavigate();
   useBlobVisibility();
 
   useEffect(() => {
@@ -20,13 +21,18 @@ export const PortfolioPage = (): JSX.Element => {
           <div className="blob blob--hero-2" />
         </div>
         <div className="container page-hero__content">
-          <Link to="/" className="back-btn">
+          <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate("/")}
+          >
             ← Back
-          </Link>
+          </button>
           <p className="sec-label">All Work</p>
           <h1>Case Studies</h1>
           <p className="hero__description">
-            A collection of UX/UI projects spanning mobile, fintech, and health-tech.
+            A collection of UX/UI projects spanning mobile, fintech, and
+            health-tech.
           </p>
         </div>
       </div>

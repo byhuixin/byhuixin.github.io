@@ -64,19 +64,24 @@ export const Experience = (): JSX.Element => {
                 <div className="exp-dot" />
                 <div className="exp-year">{job.period}</div>
                 <div className="exp-body">
-                  <button
-                    type="button"
+                  <div
                     className="exp-trigger"
                     aria-expanded={isOpen}
-                    onClick={() => setOpenIndex((current) => (current === index ? null : index))}
+                    onClick={() =>
+                      setOpenIndex((current) =>
+                        current === index ? null : index,
+                      )
+                    }
                   >
                     <div className="exp-head">
                       <span className="exp-title">{job.title}</span>
                       <span className="exp-client">{job.client}</span>
                     </div>
                     <ChevronIcon />
-                  </button>
-                  <div className={`exp-panel${isOpen ? " exp-panel--open" : ""}`}>
+                  </div>
+                  <div
+                    className={`exp-panel${isOpen ? " exp-panel--open" : ""}`}
+                  >
                     <div className="exp-panel-inner">
                       <div className="exp-panel-content">
                         {job.desc && <p className="exp-desc">{job.desc}</p>}
@@ -94,7 +99,9 @@ export const Experience = (): JSX.Element => {
                             {job.highlights.map((highlight) => (
                               <div key={highlight.label} className="hl-item">
                                 <div className="hl-num">{highlight.num}</div>
-                                <div className="hl-label">{highlight.label}</div>
+                                <div className="hl-label">
+                                  {highlight.label}
+                                </div>
                               </div>
                             ))}
                           </div>
