@@ -5,11 +5,6 @@ export const Hero = (): JSX.Element => {
 
   return (
     <section id="home" className="hero section-wrapper">
-      <div className="blob-layer" aria-hidden="true">
-        <div className="blob blob--hero-1" />
-        <div className="blob blob--hero-2" />
-      </div>
-
       <div className="container hero__content">
         <h1>Bridging development and design</h1>
         <p className="hero__description">

@@ -12,10 +12,6 @@ export const PortfolioPreview = (): JSX.Element | null => {
 
   return (
     <section id="portfolio" className="section section--alt section-wrapper">
-      <div className="blob-layer" aria-hidden="true">
-        <div className="blob blob--portfolio-1" />
-      </div>
-
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <p className="sec-label">Featured Work</p>
         <h2>Case Studies</h2>

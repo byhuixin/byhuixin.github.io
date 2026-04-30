@@ -38,9 +38,6 @@ export const Experience = (): JSX.Element => {
 
   return (
     <section id="experience" className="section section--alt section-wrapper">
-      <div className="blob-layer" aria-hidden="true">
-        <div className="blob blob--exp-1" />
-      </div>
       <div className="container section-content">
         <p className="sec-label">Work Experience</p>
         <h2>Experience</h2>

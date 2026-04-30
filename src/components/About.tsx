@@ -1,9 +1,5 @@
 export const About = (): JSX.Element => (
   <section id="about" className="section section-wrapper">
-    <div className="blob-layer" aria-hidden="true">
-      <div className="blob blob--about-1" />
-      <div className="blob blob--about-2" />
-    </div>
     <div className="container about__content">
       <div className="about">
         <div>
