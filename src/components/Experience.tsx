@@ -67,6 +67,7 @@ export const Experience = (): JSX.Element => {
                 <div className="exp-dot" />
                 <div className="exp-year">{job.period}</div>
                 <div className="exp-body">
+                  {/* ── Trigger row (title + chevron) ── */}
                   <div
                     className={`exp-trigger${isOpen ? " exp-trigger--active" : ""}`}
                     role="button"
@@ -86,12 +87,37 @@ export const Experience = (): JSX.Element => {
                     </div>
                     <ChevronIcon />
                   </div>
+
+                  {/* ── Always visible: desc ── */}
+                  {job.desc && <p className="exp-desc">{job.desc}</p>}
+
+                  {/* ── Collapsed only: chips ── */}
+                  {!isOpen && job.chips.length > 0 && (
+                    <div className="chips">
+                      {job.chips.map((chip) => (
+                        <span key={chip} className="chip">
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* ── Expandable: contributions → chips → highlights ── */}
                   <div
                     className={`exp-panel${isOpen ? " exp-panel--open" : ""}`}
                   >
                     <div className="exp-panel-inner">
                       <div className="exp-panel-content">
-                        {job.desc && <p className="exp-desc">{job.desc}</p>}
+                        {job.contributions && job.contributions.length > 0 && (
+                          <div className="exp-contributions">
+                            <ul className="exp-contributions__list">
+                              {job.contributions.map((point) => (
+                                <li key={point}>{point}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
                         {job.chips.length > 0 && (
                           <div className="chips">
                             {job.chips.map((chip) => (
@@ -101,6 +127,7 @@ export const Experience = (): JSX.Element => {
                             ))}
                           </div>
                         )}
+
                         {job.highlights.length > 0 && (
                           <div className="highlight-bar">
                             {job.highlights.map((highlight) => (

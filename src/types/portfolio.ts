@@ -34,6 +34,7 @@ export type Job = {
   title: string;
   client: string;
   desc: string;
+  contributions: string[];
   chips: string[];
   highlights: JobHighlight[];
   active: boolean;
