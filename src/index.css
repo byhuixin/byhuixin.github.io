@@ -306,7 +306,7 @@ p {
   text-decoration: none; cursor: pointer;
   transition: var(--transition-smooth); background: none;
 }
-.btn--primary  { background-color: var(--primary-warm); color: white; }
+
 .btn--primary:hover { background-color: var(--primary-deep); transform: translateY(-2px); }
 .btn--secondary { border: 2px solid var(--neutral-charcoal); color: var(--neutral-charcoal); }
 .btn--secondary:hover { background-color: var(--neutral-charcoal); color: white; }
@@ -315,7 +315,8 @@ p {
 
 /* Back button */
 .back-btn {
-  background: none;
+  /* background: none; */
+  background-color: var(--primary-warm); color: white;
   border: none;
   font-family: inherit;
   font-size: 0.9rem;
@@ -324,6 +325,9 @@ p {
   padding: 0;
   margin-bottom: var(--space-lg);
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .back-btn:hover { color: var(--primary-warm); }
 
@@ -825,6 +829,14 @@ p {
   outline: 2px solid var(--primary-warm);
   outline-offset: 2px;
 }
+
+.exp-trigger--active,
+.exp-trigger--active:hover {
+  background-color: rgba(212, 165, 116, 0.07);
+  padding-left: 0.6rem;
+  margin-left: -0.6rem;
+}
+
 .exp-head {
   display: flex;
   align-items: baseline;
@@ -849,6 +861,12 @@ p {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
 }
 .exp-row.open .exp-chevron { transform: rotate(180deg); color: var(--primary-warm); }
+
+.arrow-icon {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
  
 .exp-panel {
   display: grid;

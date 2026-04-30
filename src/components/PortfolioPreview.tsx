@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
+import { ArrowRightIcon } from "./SvgIcons";
 
 export const PortfolioPreview = (): JSX.Element | null => {
   const navigate = useNavigate();
@@ -51,7 +52,8 @@ export const PortfolioPreview = (): JSX.Element | null => {
                 navigate(`/case-study/${featured.slug}`);
               }}
             >
-              View Case Study →
+              <span>View Case Study</span>
+              <ArrowRightIcon />
             </button>
           </div>
         </div>

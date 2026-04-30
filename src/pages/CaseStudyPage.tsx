@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { Footer } from "../components/Footer";
+import { ArrowLeftIcon, ArrowRightIcon } from "../components/SvgIcons";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 
 export const CaseStudyPage = (): JSX.Element => {
@@ -25,7 +26,7 @@ export const CaseStudyPage = (): JSX.Element => {
           style={{ marginTop: "1rem" }}
           onClick={() => navigate("/#portfolio")}
         >
-          Back to Featured Work
+          Back
         </button>
       </div>
     );
@@ -48,16 +49,10 @@ export const CaseStudyPage = (): JSX.Element => {
             type="button"
             className="back-btn"
             onClick={() => navigate("/#portfolio")}
+            aria-label="Back to portfolio"
           >
-            ← Featured Work
+            <ArrowLeftIcon />
           </button>
-          <div className="cs-tags" style={{ marginBottom: "var(--space-sm)" }}>
-            {caseStudy.tags.map((tag) => (
-              <span key={tag} className="cs-tag">
-                {tag}
-              </span>
-            ))}
-          </div>
           <h1>{caseStudy.title}</h1>
           <p className="cs-detail-hero__subtitle">{caseStudy.subtitle}</p>
         </div>
@@ -112,7 +107,9 @@ export const CaseStudyPage = (): JSX.Element => {
                     <div className="pf-step__text">{step.text}</div>
                   </div>
                   {index < caseStudy.processSteps.length - 1 && (
-                    <div className="pf-step__arrow">→</div>
+                    <div className="pf-step__arrow">
+                      <ArrowRightIcon />
+                    </div>
                   )}
                 </>
               ))}
@@ -175,7 +172,8 @@ export const CaseStudyPage = (): JSX.Element => {
               className="btn btn--primary"
               onClick={() => navigate(`/case-study/${nextStudy.slug}`)}
             >
-              {nextStudy.title} →
+              <span>{nextStudy.title}</span>
+              <ArrowRightIcon />
             </button>
           </div>
         </div>
