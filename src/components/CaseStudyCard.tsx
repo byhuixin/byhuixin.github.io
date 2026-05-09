@@ -24,7 +24,7 @@ export const CaseStudyCard = ({
       />
       <div className="cs-card__body">
         <div className="cs-tags">
-          {caseStudy.tags.map((tag) => (
+          {caseStudy.tags?.map((tag) => (
             <span key={tag} className="cs-tag">
               {tag}
             </span>

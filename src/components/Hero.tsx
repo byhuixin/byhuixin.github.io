@@ -6,7 +6,8 @@ export const Hero = (): JSX.Element => {
   return (
     <section id="home" className="hero section-wrapper">
       <div className="container hero__content">
-        <h1>Bridging development and design</h1>
+        <h1>Bridging development</h1>
+        <h1>and design</h1>
         <p className="hero__description">
           With a background in software development, I design user-friendly
           experiences that balance real-world constraints with clarity and

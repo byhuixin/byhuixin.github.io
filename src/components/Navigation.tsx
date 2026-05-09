@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
 export const Navigation = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -14,12 +15,25 @@ export const Navigation = (): JSX.Element => {
     <>
       <nav className="nav">
         <div className="nav__container container">
-          <NavLink to="/" className="nav__logo" onClick={() => setOpen(false)}>
-            Portfolio
+          <NavLink
+            to="/"
+            className="nav__logo-link"
+            onClick={() => setOpen(false)}
+          >
+            <img src={logo} alt="HuiXin logo" className="nav__logo-image" />
           </NavLink>
 
-          {/* Desktop links */}
+          {/* Desktop pill group */}
           <ul className="nav__menu">
+            <li>
+              <button
+                type="button"
+                className="nav__link"
+                onClick={() => handleNavClick("#portfolio")}
+              >
+                Works
+              </button>
+            </li>
             <li>
               <button
                 type="button"
@@ -56,6 +70,15 @@ export const Navigation = (): JSX.Element => {
 
         {/* Mobile drawer */}
         <ul className={`nav__drawer${open ? " open" : ""}`}>
+          <li>
+            <button
+              type="button"
+              className="nav__link"
+              onClick={() => handleNavClick("#portfolio")}
+            >
+              Works
+            </button>
+          </li>
           <li>
             <button
               type="button"
