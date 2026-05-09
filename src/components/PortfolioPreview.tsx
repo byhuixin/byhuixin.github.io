@@ -445,7 +445,7 @@ export const PortfolioPreview = (): JSX.Element | null => {
             <p className="pf-featured__subtitle">{featured.subtitle}</p>
             <p className="pf-featured__lead">{featured.lead}</p>
 
-            {/* Stats preview */}
+            {/* Stats preview
             <div className="pf-featured__stats">
               <div className="pf-featured__stat">
                 <span className="pf-featured__stat-num">210k+</span>
@@ -465,7 +465,7 @@ export const PortfolioPreview = (): JSX.Element | null => {
                   key design decisions
                 </span>
               </div>
-            </div>
+            </div> */}
 
             <button
               type="button"

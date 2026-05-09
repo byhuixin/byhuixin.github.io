@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Hero = (): JSX.Element => {
@@ -5,9 +6,27 @@ export const Hero = (): JSX.Element => {
 
   return (
     <section id="home" className="hero section-wrapper">
-      <div className="container hero__content">
-        <h1>Bridging development</h1>
-        <h1>and design</h1>
+      <div
+        className="container hero__content"
+        style={{ position: "relative", zIndex: 1 }}
+      >
+        {" "}
+        <h1>
+          <span style={{ display: "block", color: "var(--neutral-deep)" }}>
+            Bridging
+          </span>
+          <span
+            style={{
+              display: "block",
+              color: "var(--primary-warm)",
+            }}
+          >
+            development
+          </span>
+          <span style={{ display: "block" }}>
+            and <span style={{ color: "var(--secondary-sage)" }}>design</span>
+          </span>
+        </h1>
         <p className="hero__description">
           With a background in software development, I design user-friendly
           experiences that balance real-world constraints with clarity and
