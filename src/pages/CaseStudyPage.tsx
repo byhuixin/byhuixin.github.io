@@ -5,7 +5,6 @@ import { Footer } from "../components/Footer";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 import {
   HeroIllustration,
-  ProcessFlowSVG,
   DashboardScreen,
   CalendarScreen,
   AddTaskScreen,
