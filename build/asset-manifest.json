@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/UX-Portfolio/static/css/main.b405f2d3.css",
+    "main.js": "/UX-Portfolio/static/js/main.f21b808a.js",
+    "index.html": "/UX-Portfolio/index.html",
+    "main.b405f2d3.css.map": "/UX-Portfolio/static/css/main.b405f2d3.css.map",
+    "main.f21b808a.js.map": "/UX-Portfolio/static/js/main.f21b808a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b405f2d3.css",
+    "static/js/main.f21b808a.js"
+  ]
+}

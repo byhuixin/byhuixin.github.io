@@ -1,9 +1,5 @@
 export const About = (): JSX.Element => (
   <section id="about" className="section section-wrapper">
-    <div className="blob-layer" aria-hidden="true">
-      <div className="blob blob--about-1" />
-      <div className="blob blob--about-2" />
-    </div>
     <div className="container about__content">
       <div className="about">
         <div>
@@ -11,7 +7,7 @@ export const About = (): JSX.Element => (
         </div>
         <div>
           <p className="sec-label">About Me</p>
-          <h2>About Me</h2>
+          <h2>Hi there, I'm Hui Xin</h2>
           <p className="text-medium">
             I started out as a software developer in the fintech space, building
             mobile and web applications for banking products. Over time, I found

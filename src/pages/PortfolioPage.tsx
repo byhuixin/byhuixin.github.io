@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { CaseStudyCard } from "../components/CaseStudyCard";
 import { Footer } from "../components/Footer";
+import { ArrowLeftIcon } from "../components/SvgIcons";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 
 export const PortfolioPage = (): JSX.Element => {
@@ -26,7 +27,9 @@ export const PortfolioPage = (): JSX.Element => {
             className="back-btn"
             onClick={() => navigate("/")}
           >
-            ← Back
+            <ArrowLeftIcon />
+            back
+            <span>Back</span>
           </button>
           <p className="sec-label">All Work</p>
           <h1>Case Studies</h1>
