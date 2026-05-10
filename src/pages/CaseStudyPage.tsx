@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { Footer } from "../components/Footer";
-import { ArrowLeftIcon } from "../components/SvgIcons";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 import {
   HeroIllustration,
