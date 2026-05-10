@@ -50,12 +50,12 @@ export const MobileTabBar = (): JSX.Element => {
             <span className="mobile-tab-bar__icon" aria-hidden="true">
               {tab.section === "portfolio" && (
                 <svg
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
@@ -65,12 +65,12 @@ export const MobileTabBar = (): JSX.Element => {
               )}
               {tab.section === "about" && (
                 <svg
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
@@ -80,12 +80,12 @@ export const MobileTabBar = (): JSX.Element => {
               )}
               {tab.section === "contact" && (
                 <svg
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >

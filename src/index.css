@@ -2226,24 +2226,25 @@ p {
     z-index: 100;
     background: var(--neutral-cream);
     border-radius: 100px;
-    padding: 0.65rem 1.25rem;
+    padding: 12px 32px;
     justify-content: space-between; /* spread tabs evenly */
     align-items: center;
     box-shadow: 0 4px 24px rgba(30, 23, 16, 0.14);
   }
 
+  /* inside @media (max-width: 768px) */
   .mobile-tab-bar__item {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
+    align-items: center; /* ← add this */
+    gap: 12px;
+    padding: 12px 24px;
     border-radius: 100px;
     cursor: pointer;
     border: none;
     background: none;
     font-family: inherit;
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
     color: var(--neutral-mid-grey);
     transition:
       background 0.18s ease,
@@ -2480,9 +2481,14 @@ p {
     padding: 0.5rem 0.75rem;
   }
   .mobile-tab-bar__item {
-    padding: 7px 10px;
+    padding: 12px 16px;
     font-size: 0.8rem;
     gap: 4px;
+  }
+
+  .mobile-tab-bar__icon svg {
+    width: 18px;
+    height: 18px;
   }
 
   .cs-stat-strip {
