@@ -61,7 +61,7 @@ export const CaseStudyPage = (): JSX.Element => {
       >
         <div className="cs-hero__backdrop" aria-hidden="true" />
         <div className="container cs-hero__inner">
-          <button
+          {/* <button
             type="button"
             className="back-btn cs-hero__back"
             onClick={() => navigate("/#portfolio")}
@@ -69,7 +69,7 @@ export const CaseStudyPage = (): JSX.Element => {
           >
             <ArrowLeftIcon />
             <span>Back</span>
-          </button>
+          </button> */}
 
           <div className="cs-hero__layout">
             <div className="cs-hero__text">

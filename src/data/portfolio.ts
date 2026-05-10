@@ -304,10 +304,7 @@ export const jobs: Job[] = [
       "Maintained close collaboration with product and design teams to ship user-facing work on time.",
     ],
     chips: [],
-    highlights: [
-      { num: "3+", label: "Years" },
-      { num: "2", label: "Clients" },
-    ],
+    highlights: [],
     active: true,
   },
   {

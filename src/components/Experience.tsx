@@ -64,7 +64,6 @@ export const Experience = (): JSX.Element => {
                 <div className="exp-dot" />
                 <div className="exp-year">{job.period}</div>
                 <div className="exp-body">
-                  {/* ── Trigger row (title + chevron) ── */}
                   <div
                     className={`exp-trigger${isOpen ? " exp-trigger--active" : ""}`}
                     role="button"
@@ -78,17 +77,16 @@ export const Experience = (): JSX.Element => {
                       }
                     }}
                   >
-                    <div className="exp-head">
+                    {/* data-date powers the CSS ::before on mobile */}
+                    <div className="exp-head" data-date={job.period}>
                       <span className="exp-title">{job.title}</span>
                       <span className="exp-client">{job.client}</span>
                     </div>
-                    <ChevronIcon />
+                    <ChevronIcon className="exp-chevron" />
                   </div>
 
-                  {/* ── Always visible: desc ── */}
                   {job.desc && <p className="exp-desc">{job.desc}</p>}
 
-                  {/* ── Collapsed only: chips ── */}
                   {!isOpen && job.chips.length > 0 && (
                     <div className="chips">
                       {job.chips.map((chip) => (
@@ -99,7 +97,6 @@ export const Experience = (): JSX.Element => {
                     </div>
                   )}
 
-                  {/* ── Expandable: contributions → chips → highlights ── */}
                   <div
                     className={`exp-panel${isOpen ? " exp-panel--open" : ""}`}
                   >
@@ -114,7 +111,6 @@ export const Experience = (): JSX.Element => {
                             </ul>
                           </div>
                         )}
-
                         {job.chips.length > 0 && (
                           <div className="chips">
                             {job.chips.map((chip) => (
@@ -124,7 +120,6 @@ export const Experience = (): JSX.Element => {
                             ))}
                           </div>
                         )}
-
                         {job.highlights.length > 0 && (
                           <div className="highlight-bar">
                             {job.highlights.map((highlight) => (

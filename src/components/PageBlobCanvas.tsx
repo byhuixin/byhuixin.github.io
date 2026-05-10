@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
 interface Blob {
-  xFrac: number; // x position as fraction of viewport width
-  yFrac: number; // y position as fraction of viewport height
-  rxFrac: number; // x radius as fraction of viewport width
-  ryFrac: number; // y radius as fraction of viewport height
-  peakScroll: number; // 0–1, fraction of page height where this blob peaks
+  xFrac: number;
+  yFrac: number;
+  rxFrac: number;
+  ryFrac: number;
+  peakScroll: number;
   color: string;
   wobble: number;
   phaseOffset: number;
@@ -13,7 +13,6 @@ interface Blob {
 
 const BLOBS: Blob[] = [
   {
-    // A — top-left, active near hero (top of page)
     xFrac: -0.02,
     yFrac: -0.02,
     rxFrac: 0.4,
@@ -24,9 +23,8 @@ const BLOBS: Blob[] = [
     phaseOffset: 2,
   },
   {
-    // B — bottom-right, active near hero/experience
     xFrac: 1.02,
-    yFrac: 0.7, // was 0.08
+    yFrac: 0.7,
     rxFrac: 0.3,
     ryFrac: 0.5,
     peakScroll: 0.1,
@@ -35,20 +33,19 @@ const BLOBS: Blob[] = [
     phaseOffset: 5,
   },
   {
-    // C — bottom-right, active near contact
     xFrac: 1.02,
     yFrac: 1.02,
     rxFrac: 0.45,
     ryFrac: 0.7,
     peakScroll: 1,
-    color: "#e8c4b0",
+    color: "#c47a5a",
     wobble: 0.07,
     phaseOffset: 7,
   },
 ];
 
 const PTS = 48;
-const FADE_RANGE = 0.35; // how wide the fade-in/out window is (in scroll fraction)
+const FADE_RANGE = 0.35;
 
 function blobOpacity(peakScroll: number, scrollFrac: number): number {
   const dist = Math.abs(scrollFrac - peakScroll);
@@ -126,6 +123,7 @@ export const PageBlobCanvas = (): JSX.Element => {
       raf = requestAnimationFrame(draw);
       ctx.clearRect(0, 0, W, H);
       const t = now * 0.0001;
+      const isMobile = W < 768;
 
       for (const blob of BLOBS) {
         const opacity = blobOpacity(blob.peakScroll, scrollFrac);
@@ -133,17 +131,20 @@ export const PageBlobCanvas = (): JSX.Element => {
 
         const cx = blob.xFrac * W;
         const cy = blob.yFrac * H;
-        const rx = blob.rxFrac * W;
+        // on mobile use H as the base for rx so blobs stay
+        // proportional on narrow viewports instead of going wide
+        const rx = blob.rxFrac * (isMobile ? H * 0.7 : W);
         const ry = blob.ryFrac * H;
 
-        // outer blob — lighter, larger
-        ctx.globalAlpha = opacity * 0.2;
+        const outerAlpha = isMobile ? opacity * 0.15 : opacity * 0.2;
+        const innerAlpha = isMobile ? opacity * 0.12 : opacity * 0.18;
+
+        ctx.globalAlpha = outerAlpha;
         drawBlob(ctx, cx, cy, rx, ry, t + blob.phaseOffset, blob.wobble);
         ctx.fillStyle = blob.color;
         ctx.fill();
 
-        // inner blob — slightly smaller, slightly more opaque
-        ctx.globalAlpha = opacity * 0.18;
+        ctx.globalAlpha = innerAlpha;
         drawBlob(
           ctx,
           cx,

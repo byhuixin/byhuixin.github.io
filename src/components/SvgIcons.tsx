@@ -1,6 +1,10 @@
-export const ChevronIcon = (): JSX.Element => (
+export const ChevronIcon = ({
+  className,
+}: {
+  className?: string;
+}): JSX.Element => (
   <svg
-    className="exp-chevron"
+    className={className}
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
