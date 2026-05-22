@@ -1,24 +1,122 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
-import { Footer } from "../components/Footer";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 import {
   HeroIllustration,
-  DashboardScreen,
-  CalendarScreen,
-  AddTaskScreen,
-  RecipientScreen,
-  OnboardingScreen,
+  OnboardingFirst,
+  OnboardingFourth,
+  OnboardingSecond,
+  OnboardingThird,
+  OnboardingFifth,
+  AddTaskFirst,
+  AddTaskSecond,
+  AddTaskThird,
+  AddTaskFourth,
+  AddMedFirst,
+  AddMedSecond,
+  AddMedThird,
 } from "../components/CareNestIllustrations";
+import { ScreenPrototype } from "../components/ScreenPrototype";
 
-// Map slugs to screen components for key screens
-const screenComponents: Record<string, React.ComponentType> = {
-  Dashboard: DashboardScreen,
-  "Calendar / Timeline View": CalendarScreen,
-  "Add Task Flow": AddTaskScreen,
-  "Care Recipient Profile": RecipientScreen,
-  "Onboarding & Join Care Team": OnboardingScreen,
+// Replace the screenComponents map at the top of CaseStudyPage.tsx
+const flowScreens = {
+  onboarding: [
+    {
+      title: "Welcome",
+      badge: "Onboarding · 1 of 5",
+      description:
+        "A simple entry point for caregivers to create an account or return to an existing care setup.",
+      component: OnboardingFirst,
+    },
+
+    {
+      title: "Create Account",
+      badge: "Onboarding · 2 of 5",
+      description:
+        "New users create their account to begin setting up and managing collaborative care.",
+      component: OnboardingSecond,
+    },
+
+    {
+      title: "Care Setup",
+      badge: "Onboarding · 3 of 5",
+      description:
+        "Caregivers can either join an existing care team or create a new care recipient profile to begin coordinating care.",
+      component: OnboardingThird,
+    },
+
+    {
+      title: "Create Care Recipient",
+      badge: "Onboarding · 4 of 5",
+      description:
+        "Set up a care recipient profile to establish the foundation for shared caregiving, task management, and medical tracking.",
+      component: OnboardingFourth,
+    },
+
+    {
+      title: "Ready to Begin",
+      badge: "Onboarding · 5 of 5",
+      description:
+        "Confirmation that the care setup is complete, with direct access to the shared caregiving dashboard.",
+      component: OnboardingFifth,
+    },
+  ],
+  tasks: [
+    {
+      title: "Getting Started",
+      badge: "Daily Flow · 1 of 4",
+      description:
+        "A calm empty state that helps new caregivers begin setting up tasks, medications, and appointments from one central dashboard.",
+      component: AddTaskFirst,
+    },
+
+    {
+      title: "Choose Task Type",
+      badge: "Daily Flow · 2 of 4",
+      description:
+        "Caregivers can quickly add a care task, medication, vitals log, or appointment from one unified entry point.",
+      component: AddTaskSecond,
+    },
+
+    {
+      title: "Create Task",
+      badge: "Daily Flow · 3 of 4",
+      description:
+        "Simple task creation flow with clear inputs for scheduling, assignment, and care details.",
+      component: AddTaskThird,
+    },
+
+    {
+      title: "Task Added",
+      badge: "Daily Flow · 4 of 4",
+      description:
+        "The dashboard updates instantly with a success message, giving caregivers immediate visibility of the newly added task.",
+      component: AddTaskFourth,
+    },
+  ],
+  medication: [
+    {
+      title: "Medication Home",
+      badge: "Medication · 1 of 3",
+      description: "Overview of all medications.",
+      component: AddMedFirst,
+    },
+    {
+      title: "Add Medication",
+      badge: "Medication · 2 of 3",
+      description:
+        "Enter medication details including name, dosage, type, and frequency. Inline selectors keep the form quick and structured.",
+      component: AddMedSecond,
+    },
+    {
+      title: "Medication Added",
+      badge: "Medication · 3 of 3",
+      description:
+        "Returns to medication home with a success confirmation. Newly added medication is now visible in the list.",
+      component: AddMedThird,
+    },
+  ],
 };
 
 export const CaseStudyPage = (): JSX.Element => {
@@ -189,8 +287,6 @@ export const CaseStudyPage = (): JSX.Element => {
               </div>
             </div>
 
-            <div className="cs-research-divider" />
-
             {/* Secondary */}
             <div className="cs-research-secondary">
               <div className="cs-research-secondary__header">
@@ -237,7 +333,7 @@ export const CaseStudyPage = (): JSX.Element => {
               <p className="cs-section-desc">
                 Research uncovered four core caregiver needs that shaped the
                 direction of CareNest, guiding how insights were translated into
-                meaningful design opportunities.
+                meaningful design opportunities
               </p>
             </div>
 
@@ -365,57 +461,46 @@ export const CaseStudyPage = (): JSX.Element => {
             <div className="cs-section-header">
               <span className="cs-eyebrow">Key Screens</span>
               <h2 className="cs-section-title">The design</h2>
+              <p className="cs-section-desc">
+                Tap through each flow to see how the app guides caregivers from
+                setup to daily use.
+              </p>
             </div>
 
-            <div className="cs-screens-grid">
-              {cs.keyScreens.map((screen, i) => {
-                const ScreenSVG = screenComponents[screen.title];
-                return (
-                  <div key={screen.title} className="cs-screen">
-                    <div className="cs-screen__visual">
-                      {screen.image ? (
-                        <img
-                          src={screen.image}
-                          alt={screen.title}
-                          className="cs-screen__img"
-                        />
-                      ) : ScreenSVG ? (
-                        <div className="cs-screen__phone-wrap">
-                          <div className="cs-phone-shell">
-                            {/* Phone chrome */}
-                            <div
-                              className="cs-phone-shell__notch"
-                              aria-hidden="true"
-                            />
-                            <div className="cs-phone-shell__screen">
-                              <ScreenSVG />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="cs-screen__placeholder">
-                          <span className="cs-screen__placeholder-num">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                      )}
-                    </div>
+            <div className="cs-flows">
+              <div className="cs-flow">
+                <div className="cs-flow__label">
+                  <span className="cs-eyebrow">Flow 01</span>
+                  <h3>Onboarding &amp; care team setup</h3>
+                </div>
+                <ScreenPrototype
+                  screens={flowScreens.onboarding}
+                  flowId="onboarding"
+                />
+              </div>
 
-                    <div className="cs-screen__caption">
-                      {screen.badge && (
-                        <span className="cs-screen__badge">{screen.badge}</span>
-                      )}
-                      <p className="cs-screen__title">{screen.title}</p>
-                      <p className="cs-screen__desc">{screen.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="cs-flow">
+                <div className="cs-flow__label">
+                  <span className="cs-eyebrow">Flow 02</span>
+                  <h3>Daily dashboard &amp; Add care task</h3>
+                </div>
+                <ScreenPrototype screens={flowScreens.tasks} flowId="tasks" />
+              </div>
+
+              <div className="cs-flow">
+                <div className="cs-flow__label">
+                  <span className="cs-eyebrow">Flow 03</span>
+                  <h3>Add new medication</h3>
+                </div>
+                <ScreenPrototype
+                  screens={flowScreens.medication}
+                  flowId="medication"
+                />
+              </div>
             </div>
           </div>
         </section>
       )}
-
       {/* ─────────────────────────────────────────────
           DESIGN DECISIONS
       ───────────────────────────────────────────── */}
@@ -492,8 +577,6 @@ export const CaseStudyPage = (): JSX.Element => {
           </div>
         </section>
       )}
-
-      <Footer />
     </div>
   );
 };

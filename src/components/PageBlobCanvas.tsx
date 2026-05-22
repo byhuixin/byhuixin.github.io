@@ -9,6 +9,7 @@ interface Blob {
   color: string;
   wobble: number;
   phaseOffset: number;
+  maxOpacity?: number;
 }
 
 const BLOBS: Blob[] = [
@@ -32,25 +33,33 @@ const BLOBS: Blob[] = [
     wobble: 0.06,
     phaseOffset: 5,
   },
-  {
-    xFrac: 1.02,
-    yFrac: 0.95,
-    rxFrac: 0.45,
-    ryFrac: 0.5,
-    peakScroll: 1,
-    color: "#e8c4b0",
-    wobble: 0.07,
-    phaseOffset: 7,
-  },
+  // {
+  //   // Pushed further off-screen to the right, higher up so it only
+  //   // peeks in from the corner rather than flooding the form area.
+  //   xFrac: 1.08,
+  //   yFrac: 0.75,
+  //   rxFrac: 0.32,
+  //   ryFrac: 0.38,
+  //   peakScroll: 1,
+  //   color: "#e8c4b0",
+  //   wobble: 0.07,
+  //   phaseOffset: 7,
+  //   // Cap opacity so it stays decorative and never overwhelms content.
+  //   maxOpacity: 0.5,
+  // },
 ];
 
 const PTS = 48;
 const FADE_RANGE = 0.35;
 
-function blobOpacity(peakScroll: number, scrollFrac: number): number {
+function blobOpacity(
+  peakScroll: number,
+  scrollFrac: number,
+  maxOpacity = 1,
+): number {
   const dist = Math.abs(scrollFrac - peakScroll);
   const raw = 1 - dist / FADE_RANGE;
-  return Math.max(0, Math.min(1, raw));
+  return Math.max(0, Math.min(maxOpacity, raw));
 }
 
 function drawBlob(
@@ -126,18 +135,21 @@ export const PageBlobCanvas = (): JSX.Element => {
       const isMobile = W < 768;
 
       for (const blob of BLOBS) {
-        const opacity = blobOpacity(blob.peakScroll, scrollFrac);
+        const opacity = blobOpacity(
+          blob.peakScroll,
+          scrollFrac,
+          blob.maxOpacity,
+        );
         if (opacity <= 0) continue;
 
         const cx = blob.xFrac * W;
         const cy = blob.yFrac * H;
-        // on mobile use H as the base for rx so blobs stay
-        // proportional on narrow viewports instead of going wide
         const rx = blob.rxFrac * (isMobile ? H * 0.7 : W);
         const ry = blob.ryFrac * H;
 
-        const outerAlpha = isMobile ? opacity * 0.15 : opacity * 0.2;
-        const innerAlpha = isMobile ? opacity * 0.12 : opacity * 0.18;
+        // Outer layer — softer on the contact blob
+        const outerAlpha = isMobile ? opacity * 0.12 : opacity * 0.15;
+        const innerAlpha = isMobile ? opacity * 0.09 : opacity * 0.11;
 
         ctx.globalAlpha = outerAlpha;
         drawBlob(ctx, cx, cy, rx, ry, t + blob.phaseOffset, blob.wobble);

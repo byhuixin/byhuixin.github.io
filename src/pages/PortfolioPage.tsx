@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { caseStudies } from "../data/portfolio";
 import { CaseStudyCard } from "../components/CaseStudyCard";
-import { Footer } from "../components/Footer";
 import { ArrowLeftIcon } from "../components/SvgIcons";
 import { useBlobVisibility } from "../hooks/useBlobVisibility";
 
@@ -48,7 +47,6 @@ export const PortfolioPage = (): JSX.Element => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

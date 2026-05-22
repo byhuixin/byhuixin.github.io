@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://butteredbagel.github.io/UX-Portfolio",
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@fontsource/dm-serif-display": "^5.2.8",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
