@@ -103,7 +103,7 @@ const flowScreens = {
       component: AddMedFirst,
     },
     {
-      title: "Add Medication",
+      title: "Add Medication Form",
       badge: "Medication · 2 of 3",
       description:
         "Enter medication details including name, dosage, type, and frequency. Inline selectors keep the form quick and structured.",
@@ -147,7 +147,7 @@ export const CaseStudyPage = (): JSX.Element => {
   }
 
   return (
-    <div className="page cs-page">
+    <div className="page cs-page" id="top">
       {/* ─────────────────────────────────────────────
           HERO — full-bleed atmosphere
       ───────────────────────────────────────────── */}
@@ -504,7 +504,7 @@ export const CaseStudyPage = (): JSX.Element => {
       {/* ─────────────────────────────────────────────
           DESIGN DECISIONS
       ───────────────────────────────────────────── */}
-      {cs.designDecisions && (
+      {/* {cs.designDecisions && (
         <section className="cs-decisions section-wrapper">
           <div className="blob-layer" aria-hidden="true">
             <div className="blob blob--contact-2" />
@@ -545,12 +545,12 @@ export const CaseStudyPage = (): JSX.Element => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* ─────────────────────────────────────────────
           REFLECTION
       ───────────────────────────────────────────── */}
-      {cs.reflection && (
+      {/* {cs.reflection && (
         <section className="cs-reflection section-wrapper">
           <div className="blob-layer" aria-hidden="true">
             <div className="blob blob--hero-2" />
@@ -576,7 +576,41 @@ export const CaseStudyPage = (): JSX.Element => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
+
+      {/* ─────────────────────────────────────────────
+          DISCLAIMER
+      ───────────────────────────────────────────── */}
+      <section
+        style={{ padding: "3rem 0", background: "var(--neutral-warm-white)" }}
+      >
+        <div
+          className="container"
+          style={{ textAlign: "center", maxWidth: "680px" }}
+        >
+          <p
+            style={{
+              fontSize: "1rem",
+              color: "var(--neutral-mid-grey)",
+              lineHeight: "1.75",
+              margin: "0",
+            }}
+          >
+            Selected flows and screens are shown here for brevity. Please feel
+            free to reach out if you'd like to view the full case study and
+            process work.
+          </p>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          BACK TO TOP LINK
+      ───────────────────────────────────────────── */}
+      <div style={{ padding: "3rem 0", textAlign: "center" }}>
+        <a href="#top" className="footer__top">
+          Back to top ↑
+        </a>
+      </div>
     </div>
   );
 };
