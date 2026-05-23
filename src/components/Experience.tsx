@@ -140,6 +140,24 @@ export const Experience = (): JSX.Element => {
             );
           })}
         </div>
+
+        {/* Resume Button at Bottom */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "var(--space-xl)",
+          }}
+        >
+          <a
+            href={process.env.PUBLIC_URL + "/resume.pdf"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--primary"
+          >
+            View Resume
+          </a>
+        </div>
       </div>
     </section>
   );

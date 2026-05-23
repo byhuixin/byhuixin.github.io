@@ -1,490 +1,389 @@
 // About.tsx
 import { useEffect, useRef } from "react";
+import ProfilePhoto from "../assets/images/DSC02181.jpg";
 
-// ─────────────────────────────────────────────────
-// BlobPhoto — top-left quad cell
-// Replace the inner <div> with:
-//   <img src="/images/profile.jpg" alt="Hui Xin"
-//        style={{ width:"100%", height:"100%", objectFit:"cover" }} />
-// ─────────────────────────────────────────────────
-const BlobPhoto = () => (
-  <div style={{ position: "relative", width: 260, height: 280, flexShrink: 0 }}>
-    {/* Inline SVG just to register the clipPath id */}
+const PhotoPlaceholder = () => (
+  <div
+    style={{
+      position: "relative",
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
     <svg
-      style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      viewBox="0 0 220 240"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
     >
       <defs>
-        <clipPath id="blobPhotoClip" clipPathUnits="objectBoundingBox">
-          {/* Organic asymmetric blob — wider at top-right, indented bottom-left */}
-          <path
-            d="
-            M 0.52 0.03
-            C 0.74 -0.01  0.98 0.10  0.99 0.30
-            C 1.00 0.48   0.87 0.57  0.91 0.74
-            C 0.95 0.90   1.01 0.98  0.83 1.01
-            C 0.65 1.04   0.50 0.95  0.34 0.98
-            C 0.18 1.01   0.01 1.03  0.00 0.82
-            C -0.01 0.63  0.11 0.54  0.07 0.37
-            C 0.03 0.19  -0.02 0.05  0.19 0.01
-            C 0.33 -0.02  0.42 0.05  0.52 0.03 Z
-          "
-          />
-        </clipPath>
+        <linearGradient id="pgr" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#EDE0D4" />
+          <stop offset="55%" stopColor="#D4C0A8" />
+          <stop offset="100%" stopColor="#C0A080" />
+        </linearGradient>
       </defs>
+
+      {/* Blob shape with gradient */}
+      <path
+        d="M110 12 C152 4 194 32 204 76 C214 120 194 166 156 186 C118 206 62 198 36 170 C10 142 8 92 26 54 C44 16 68 20 110 12 Z"
+        fill="url(#pgr)"
+      />
+
+      {/* Subtle texture circles */}
+      <circle cx="80" cy="70" r="50" fill="#D4B898" opacity="0.35" />
+      <circle cx="145" cy="150" r="55" fill="#C8A882" opacity="0.25" />
+      <circle cx="55" cy="170" r="38" fill="#B89870" opacity="0.2" />
+
+      {/* Person silhouette placeholder */}
+      <ellipse cx="110" cy="210" rx="62" ry="36" fill="#C4A882" opacity="0.4" />
+      <rect
+        x="74"
+        y="148"
+        width="72"
+        height="72"
+        rx="8"
+        fill="#C4A882"
+        opacity="0.3"
+      />
+      <ellipse cx="110" cy="138" rx="34" ry="38" fill="#DCC0A0" />
+
+      {/* Face details */}
+      <ellipse cx="100" cy="132" rx="4" ry="4.5" fill="#5A3820" />
+      <ellipse cx="120" cy="132" rx="4" ry="4.5" fill="#5A3820" />
+      <path
+        d="M104 145 Q110 151 116 145"
+        fill="none"
+        stroke="#7A4A28"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+
+      {/* Hair */}
+      <path
+        d="M82 118 Q110 100 138 118 C134 108 110 102 82 118 Z"
+        fill="#3A2010"
+        opacity="0.85"
+      />
+      <path
+        d="M80 120 C76 132 78 146 82 154"
+        fill="none"
+        stroke="#2E1808"
+        strokeWidth="9"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+      <path
+        d="M140 120 C144 132 142 146 138 154"
+        fill="none"
+        stroke="#2E1808"
+        strokeWidth="9"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+
+      {/* Body */}
+      <path
+        d="M82 140 C76 156 74 175 78 195 L88 195 C86 176 86 158 91 144 Z"
+        fill="#CCAA8C"
+        opacity="0.65"
+      />
+      <path
+        d="M138 140 C144 156 146 175 142 195 L132 195 C134 176 134 158 129 144 Z"
+        fill="#CCAA8C"
+        opacity="0.65"
+      />
+
+      {/* Label */}
+      <rect
+        x="55"
+        y="206"
+        width="110"
+        height="22"
+        rx="11"
+        fill="#C4A882"
+        opacity="0.35"
+      />
+      <text
+        x="110"
+        y="221"
+        fontFamily="'Inter', sans-serif"
+        fontSize="10"
+        fill="#8A6040"
+        textAnchor="middle"
+        opacity="0.8"
+        fontWeight="300"
+      ></text>
     </svg>
 
-    {/* Clipped container */}
-    <div
+    {/* Overlay for image to be placed */}
+    <img
+      src={ProfilePhoto}
+      alt="Hui Xin"
       style={{
+        position: "absolute",
+        inset: 0,
         width: "100%",
         height: "100%",
-        clipPath: "url(#blobPhotoClip)",
-        WebkitClipPath: "url(#blobPhotoClip)",
-        overflow: "hidden",
-        position: "relative",
-      }}
-    >
-      {/*
-        ── SWAP THIS BLOCK for your real photo ──────────────────────────
-        <img
-          src="/images/profile.jpg"
-          alt="Hui Xin"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-        />
-        ─────────────────────────────────────────────────────────────────
-      */}
-
-      {/* Placeholder — warm gradient background + silhouette */}
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          background:
-            "linear-gradient(160deg, var(--neutral-light-grey) 0%, #d4c4b0 55%, #c0a888 100%)",
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* Soft radial highlight — mimics studio lighting */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse 70% 60% at 60% 30%, rgba(254,252,249,0.35) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Silhouette SVG */}
-        <svg
-          viewBox="0 0 120 170"
-          width="110"
-          height="155"
-          fill="none"
-          aria-hidden="true"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          {/* Head */}
-          <ellipse
-            cx="60"
-            cy="52"
-            rx="26"
-            ry="30"
-            fill="#8a8070"
-            opacity="0.3"
-          />
-          {/* Hair — top blob */}
-          <ellipse
-            cx="60"
-            cy="30"
-            rx="28"
-            ry="18"
-            fill="#6a6058"
-            opacity="0.28"
-          />
-          {/* Shoulders / body */}
-          <path
-            d="M 14 165 C 14 112 106 112 106 165"
-            fill="#8a8070"
-            opacity="0.28"
-          />
-          {/* Neck */}
-          <rect
-            x="52"
-            y="76"
-            width="16"
-            height="22"
-            rx="6"
-            fill="#8a8070"
-            opacity="0.22"
-          />
-        </svg>
-
-        {/* "your photo here" label */}
-        <span
-          style={{
-            position: "absolute",
-            bottom: 18,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "var(--font-primary)",
-            fontSize: "0.7rem",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "var(--neutral-mid-grey)",
-            whiteSpace: "nowrap",
-            opacity: 0.75,
-          }}
-        >
-          your photo here
-        </span>
-      </div>
-    </div>
-
-    {/* Decorative accent dot — top-right */}
-    <div
-      style={{
-        position: "absolute",
-        top: 14,
-        right: -4,
-        width: 10,
-        height: 10,
-        borderRadius: "50%",
-        background: "var(--primary-warm)",
-        opacity: 0.35,
-      }}
-    />
-    {/* Decorative accent dot — bottom-left */}
-    <div
-      style={{
-        position: "absolute",
-        bottom: 22,
-        left: -6,
-        width: 7,
-        height: 7,
-        borderRadius: "50%",
-        background: "var(--secondary-sage)",
-        opacity: 0.3,
+        objectFit: "cover",
+        display: "block",
+        clipPath:
+          "polygon(20% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%, 0% 20%)",
       }}
     />
   </div>
 );
 
-// ─────────────────────────────────────────────────
-// RippleAnchor — bottom-right quad cell
-// Concentric rings + orbiting dots + pulsing cursor
-// ─────────────────────────────────────────────────
-const RippleAnchor = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+// const RippleAnchor = () => {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
-    const CX = 100,
-      CY = 100;
-    let t = 0;
-    let raf: number;
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     if (!canvas) return;
 
-    const rings = [
-      {
-        r: 28,
-        speed: 0.006,
-        dir: 1,
-        dots: 5,
-        color: [184, 92, 56] as [number, number, number],
-        dotR: 2.5,
-      },
-      {
-        r: 54,
-        speed: 0.004,
-        dir: -1,
-        dots: 8,
-        color: [107, 127, 82] as [number, number, number],
-        dotR: 2,
-      },
-      {
-        r: 80,
-        speed: 0.0025,
-        dir: 1,
-        dots: 12,
-        color: [184, 92, 56] as [number, number, number],
-        dotR: 1.5,
-      },
-    ];
+//     const ctx = canvas.getContext("2d");
+//     if (!ctx) return;
 
-    const ripples: { r: number; max: number; alpha: number }[] = [];
+//     const CX = canvas.width / 2;
+//     const CY = canvas.height / 2;
+//     let t = 0;
+//     let raf: number;
 
-    function spawnRipple() {
-      ripples.push({ r: 0, max: 92, alpha: 0.55 });
-    }
-    spawnRipple();
-    const t1 = setTimeout(spawnRipple, 700);
-    const t2 = setTimeout(spawnRipple, 1200);
-    const interval = setInterval(spawnRipple, 1700);
+//     const rings = [
+//       {
+//         r: 28,
+//         speed: 0.006,
+//         dir: 1,
+//         dots: 5,
+//         color: [184, 92, 56] as [number, number, number],
+//         dotR: 2.5,
+//       },
+//       {
+//         r: 52,
+//         speed: 0.004,
+//         dir: -1,
+//         dots: 8,
+//         color: [107, 127, 82] as [number, number, number],
+//         dotR: 2,
+//       },
+//       {
+//         r: 76,
+//         speed: 0.003,
+//         dir: 1,
+//         dots: 11,
+//         color: [184, 92, 56] as [number, number, number],
+//         dotR: 1.5,
+//       },
+//     ];
 
-    function draw() {
-      ctx.clearRect(0, 0, 200, 200);
-      t += 0.016;
+//     const ripples: { r: number; max: number; alpha: number }[] = [];
 
-      // Background glow
-      const bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, 88);
-      bg.addColorStop(0, `rgba(184,92,56,${0.04 + Math.sin(t * 1.4) * 0.02})`);
-      bg.addColorStop(1, "rgba(184,92,56,0)");
-      ctx.beginPath();
-      ctx.arc(CX, CY, 88, 0, Math.PI * 2);
-      ctx.fillStyle = bg;
-      ctx.fill();
+//     function spawnRipple() {
+//       ripples.push({ r: 0, max: 90, alpha: 0.55 });
+//     }
 
-      // Expanding ripple rings
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        const rp = ripples[i];
-        rp.r += 0.65;
-        rp.alpha = (1 - rp.r / rp.max) * 0.28;
-        if (rp.r > rp.max) {
-          ripples.splice(i, 1);
-          continue;
-        }
-        ctx.beginPath();
-        ctx.arc(CX, CY, rp.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(184,92,56,${rp.alpha})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-      }
+//     spawnRipple();
+//     const t1 = setTimeout(spawnRipple, 700);
+//     const t2 = setTimeout(spawnRipple, 1100);
+//     const interval = setInterval(spawnRipple, 1600);
 
-      // Static rings + orbiting dots
-      rings.forEach((ring) => {
-        // Ring track
-        ctx.beginPath();
-        ctx.arc(CX, CY, ring.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(${ring.color.join(",")},0.1)`;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
+//     function draw() {
+//       if (!ctx || !canvas) return;
+//       ctx.clearRect(0, 0, canvas.width, canvas.height);
+//       t += 0.016;
 
-        // Orbiting dots
-        for (let d = 0; d < ring.dots; d++) {
-          const angle =
-            (d / ring.dots) * Math.PI * 2 + t * ring.speed * ring.dir * 60;
-          const dx = CX + Math.cos(angle) * ring.r;
-          const dy = CY + Math.sin(angle) * ring.r;
-          ctx.beginPath();
-          ctx.arc(dx, dy, ring.dotR, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${ring.color.join(",")},0.5)`;
-          ctx.fill();
-        }
-      });
+//       // Draw expanding ripples
+//       for (let i = ripples.length - 1; i >= 0; i--) {
+//         const rp = ripples[i];
+//         rp.r += 0.7;
+//         rp.alpha = (1 - rp.r / rp.max) * 0.3;
+//         if (rp.r > rp.max) {
+//           ripples.splice(i, 1);
+//           continue;
+//         }
+//         ctx.beginPath();
+//         ctx.arc(CX, CY, rp.r, 0, Math.PI * 2);
+//         ctx.strokeStyle = `rgba(184, 92, 56, ${rp.alpha})`;
+//         ctx.lineWidth = 1.2;
+//         ctx.stroke();
+//       }
 
-      // Centre cursor dot — pulsing
-      const pulse = 5 + Math.sin(t * 2.2) * 1.8;
-      const centreGlow = ctx.createRadialGradient(
-        CX,
-        CY,
-        0,
-        CX,
-        CY,
-        pulse * 2.8,
-      );
-      centreGlow.addColorStop(0, "rgba(184,92,56,0.45)");
-      centreGlow.addColorStop(1, "rgba(184,92,56,0)");
-      ctx.beginPath();
-      ctx.arc(CX, CY, pulse * 2.8, 0, Math.PI * 2);
-      ctx.fillStyle = centreGlow;
-      ctx.fill();
+//       // Draw static rings with orbiting dots
+//       rings.forEach((ring) => {
+//         ctx.beginPath();
+//         ctx.arc(CX, CY, ring.r, 0, Math.PI * 2);
+//         ctx.strokeStyle = `rgba(${ring.color.join(",")}, 0.12)`;
+//         ctx.lineWidth = 0.8;
+//         ctx.stroke();
 
-      ctx.beginPath();
-      ctx.arc(CX, CY, pulse, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(184,92,56,0.82)";
-      ctx.fill();
+//         for (let d = 0; d < ring.dots; d++) {
+//           const angle =
+//             (d / ring.dots) * Math.PI * 2 + t * ring.speed * ring.dir * 60;
+//           const dx = CX + Math.cos(angle) * ring.r;
+//           const dy = CY + Math.sin(angle) * ring.r;
+//           ctx.beginPath();
+//           ctx.arc(dx, dy, ring.dotR, 0, Math.PI * 2);
+//           ctx.fillStyle = `rgba(${ring.color.join(",")}, 0.55)`;
+//           ctx.fill();
+//         }
+//       });
 
-      ctx.beginPath();
-      ctx.arc(CX, CY, pulse * 0.42, 0, Math.PI * 2);
-      ctx.fillStyle = "var(--neutral-warm-white, #fefcf9)";
-      ctx.fill();
+//       // Center dot
+//       ctx.beginPath();
+//       ctx.arc(CX, CY, 5, 0, Math.PI * 2);
+//       ctx.fillStyle = "rgba(184, 92, 56, 0.85)";
+//       ctx.fill();
+//       ctx.beginPath();
+//       ctx.arc(CX, CY, 2.5, 0, Math.PI * 2);
+//       ctx.fillStyle = "var(--neutral-warm-white, #fefcf9)";
+//       ctx.fill();
 
-      // Cursor arrow
-      ctx.save();
-      ctx.translate(CX + pulse + 2, CY + pulse + 2);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(0, 9);
-      ctx.lineTo(2.5, 6.5);
-      ctx.lineTo(4.5, 10.5);
-      ctx.lineTo(6, 10);
-      ctx.lineTo(4, 6.5);
-      ctx.lineTo(7.5, 6);
-      ctx.closePath();
-      ctx.fillStyle = "rgba(140,70,36,0.5)";
-      ctx.fill();
-      ctx.restore();
+//       raf = requestAnimationFrame(draw);
+//     }
 
-      raf = requestAnimationFrame(draw);
-    }
-    draw();
+//     draw();
 
-    return () => {
-      cancelAnimationFrame(raf);
-      clearInterval(interval);
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
+//     return () => {
+//       cancelAnimationFrame(raf);
+//       clearInterval(interval);
+//       clearTimeout(t1);
+//       clearTimeout(t2);
+//     };
+//   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={200}
-      height={200}
-      aria-hidden="true"
-      style={{ display: "block" }}
-    />
-  );
-};
+//   return (
+//     <canvas
+//       ref={canvasRef}
+//       width={200}
+//       height={200}
+//       style={{ display: "block" }}
+//       aria-hidden="true"
+//     />
+//   );
+// };
 
-// ─────────────────────────────────────────────────
-// About — main section
-// ─────────────────────────────────────────────────
 export const About = (): JSX.Element => {
   const sectionRef = useRef<HTMLElement>(null);
   const trailRef = useRef<HTMLCanvasElement>(null);
   const points = useRef<{ x: number; y: number }[]>([]);
-  const wanderRef = useRef({ x: 200, y: 160, angle: 0 });
+  const wanderRef = useRef({ x: 120, y: 120, angle: 0 });
 
   useEffect(() => {
     const section = sectionRef.current;
     const canvas = trailRef.current;
     if (!section || !canvas) return;
 
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
     let raf: number;
 
-    // ── Resize canvas to match section ──────────────────────
     const resize = () => {
-      canvas.width = section.offsetWidth;
-      canvas.height = section.offsetHeight;
+      if (canvas && section) {
+        canvas.width = section.offsetWidth;
+        canvas.height = section.offsetHeight;
+      }
     };
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(section);
+    window.addEventListener("resize", resize);
 
-    // ── Autonomous wander (Lissajous-ish) ────────────────────
-    // Also follows mouse when inside section
     const onMove = (e: MouseEvent) => {
-      const r = section.getBoundingClientRect();
-      wanderRef.current.x = e.clientX - r.left;
-      wanderRef.current.y = e.clientY - r.top;
+      if (section) {
+        const r = section.getBoundingClientRect();
+        wanderRef.current.x = e.clientX - r.left;
+        wanderRef.current.y = e.clientY - r.top;
+      }
     };
     section.addEventListener("mousemove", onMove);
 
-    let frame = 0;
-
     const draw = () => {
-      const W = canvas.width,
-        H = canvas.height;
+      if (!canvas || !ctx) return;
+      const W = canvas.width;
+      const H = canvas.height;
       const w = wanderRef.current;
 
-      // Autonomous drift — slowly explores the full section
-      frame++;
-      w.angle += 0.015;
-      w.x +=
-        Math.cos(w.angle) * 1.1 +
-        Math.sin(w.angle * 0.38) * 0.55 +
-        Math.sin(frame * 0.007) * 0.4;
-      w.y +=
-        Math.sin(w.angle * 0.72) * 1.0 +
-        Math.cos(w.angle * 0.31) * 0.5 +
-        Math.cos(frame * 0.011) * 0.35;
-
-      // Soft clamp with eased bounce off edges
-      const pad = 24;
-      if (w.x < pad) w.x += (pad - w.x) * 0.06;
-      if (w.x > W - pad) w.x -= (w.x - (W - pad)) * 0.06;
-      if (w.y < pad) w.y += (pad - w.y) * 0.06;
-      if (w.y > H - pad) w.y -= (w.y - (H - pad)) * 0.06;
+      // Wandering motion
+      w.angle += 0.018;
+      w.x += Math.cos(w.angle) * 1.2 + Math.sin(w.angle * 0.4) * 0.6;
+      w.y += Math.sin(w.angle * 0.7) * 1.1 + Math.cos(w.angle * 0.3) * 0.5;
+      w.x = Math.max(20, Math.min(W - 20, w.x));
+      w.y = Math.max(20, Math.min(H - 20, w.y));
 
       points.current.push({ x: w.x, y: w.y });
-      if (points.current.length > 90) points.current.shift();
+      if (points.current.length > 80) points.current.shift();
 
       ctx.clearRect(0, 0, W, H);
 
       const pts = points.current;
 
-      // Trail line — warm terracotta, fading in
+      // Draw trail segments with gradient fade
       for (let i = 1; i < pts.length; i++) {
         const progress = i / pts.length;
         ctx.beginPath();
         ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
         ctx.lineTo(pts[i].x, pts[i].y);
-        ctx.strokeStyle = `rgba(184,92,56,${progress * 0.11})`;
-        ctx.lineWidth = progress * 2.4;
+        ctx.strokeStyle = `rgba(184, 92, 56, ${progress * 0.18})`;
+        ctx.lineWidth = progress * 2.2;
         ctx.lineCap = "round";
         ctx.stroke();
       }
 
-      // Sage-green micro dots along trail — "breadcrumbs"
-      for (let i = 4; i < pts.length - 1; i += 4) {
-        const progress = i / pts.length;
-        if (progress < 0.28) continue;
-        ctx.beginPath();
-        ctx.arc(pts[i].x, pts[i].y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(107,127,82,${progress * 0.16})`;
-        ctx.fill();
-      }
-
-      // Soft glow at cursor head
+      // Soft glow at trail head
       if (pts.length > 0) {
         const head = pts[pts.length - 1];
-        const glow = ctx.createRadialGradient(
+        const gradient = ctx.createRadialGradient(
           head.x,
           head.y,
           0,
           head.x,
           head.y,
-          32,
+          38,
         );
-        glow.addColorStop(0, "rgba(184,92,56,0.1)");
-        glow.addColorStop(1, "rgba(184,92,56,0)");
+        gradient.addColorStop(0, "rgba(212, 168, 110, 0.13)");
+        gradient.addColorStop(1, "rgba(212, 168, 110, 0)");
         ctx.beginPath();
-        ctx.arc(head.x, head.y, 32, 0, Math.PI * 2);
-        ctx.fillStyle = glow;
+        ctx.arc(head.x, head.y, 38, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Cursor head dot
+        // Cursor dot
         ctx.beginPath();
-        ctx.arc(head.x, head.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(184,92,56,0.42)";
+        ctx.arc(head.x, head.y, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(176, 112, 64, 0.55)";
         ctx.fill();
         ctx.beginPath();
         ctx.arc(head.x, head.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(254,252,249,0.88)";
+        ctx.fillStyle = "rgba(255, 240, 225, 0.9)";
         ctx.fill();
 
-        // Cursor arrow
+        // Tiny cursor arrow
         ctx.save();
         ctx.translate(head.x + 5, head.y + 5);
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(0, 8.5);
-        ctx.lineTo(2.2, 6);
-        ctx.lineTo(4, 9.5);
-        ctx.lineTo(5.5, 9);
-        ctx.lineTo(3.8, 5.8);
-        ctx.lineTo(6.5, 5.2);
+        ctx.lineTo(0, 9);
+        ctx.lineTo(2.5, 6.5);
+        ctx.lineTo(4.5, 10);
+        ctx.lineTo(6, 9.5);
+        ctx.lineTo(4, 6);
+        ctx.lineTo(7, 5.5);
         ctx.closePath();
-        ctx.fillStyle = "rgba(140,70,36,0.38)";
+        ctx.fillStyle = "rgba(140, 88, 48, 0.45)";
         ctx.fill();
         ctx.restore();
       }
 
       raf = requestAnimationFrame(draw);
     };
+
     draw();
 
     return () => {
       cancelAnimationFrame(raf);
-      ro.disconnect();
+      window.removeEventListener("resize", resize);
       section.removeEventListener("mousemove", onMove);
     };
   }, []);
@@ -494,12 +393,14 @@ export const About = (): JSX.Element => {
       id="about"
       className="section section-wrapper"
       ref={sectionRef}
-      style={{ position: "relative", overflow: "hidden" }}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      {/* ── Cursor trail — full-section background layer ── */}
+      {/* Background cursor trail canvas */}
       <canvas
         ref={trailRef}
-        aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
@@ -508,67 +409,71 @@ export const About = (): JSX.Element => {
           pointerEvents: "none",
           zIndex: 0,
         }}
+        aria-hidden="true"
       />
 
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
-        <div className="about-quad">
-          {/* ── TL: Blob photo ── */}
-          <div className="about-quad__photo-wrap">
-            <BlobPhoto />
+      {/* Content container */}
+      <div
+        className="container"
+        style={{
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {/* Top row: Photo + Greeting */}
+        <div className="about-top-row">
+          <div className="about-photo-wrap">
+            <PhotoPlaceholder />
           </div>
 
-          {/* ── TR: Greeting + paragraph 1 ── */}
-          <div className="about-quad__greeting">
-            <span className="about-quad__hi">hi there,</span>
-            <span className="about-quad__name">i'm hui xin.</span>
-            <p className="about-quad__body" style={{ marginTop: "1rem" }}>
+          {/* <div className="about-greeting">
+            <p className="sec-label"> About Me</p>
+            <h2 className="about-hi">
+              <em className="about-hi__em">
+                Hi there, <br></br>
+              </em>
+              I'm Hui Xin.
+            </h2>
+            <p className="about-body">
               I started out as a software developer in the fintech space,
               building mobile and web applications for banking products. Over
-              time, I found myself drawn to the decisions{" "}
-              <em style={{ fontStyle: "italic", color: "var(--primary-warm)" }}>
-                behind
-              </em>{" "}
-              the screens — how users experience these systems and how small
-              design choices impact clarity and trust.
+              time, I found myself drawn to the decisions behind the
+              screens.
             </p>
           </div>
+        </div> */}
 
-          {/* ── BL: Paragraph 2 + pull quote ── */}
-          <div className="about-quad__origin">
-            <p className="about-quad__body">
-              Today, I focus on designing user-centered experiences, drawing on
+          <div className="about-greeting">
+            <p className="sec-label"> About Me</p>
+            <h2 className="about-hi">
+              <em className="about-hi__em">Hi there,</em> <br />
+              <span className="about-hi__name">I'm Hui Xin.</span>
+            </h2>
+            <p className="about-body">
+              I started out as a software developer in the fintech space,
+              building mobile and web applications for banking products. Over
+              time, I found myself drawn to the decisions behind the screens.
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom row: Paragraph + Ripple */}
+        <div className="about-bottom-row">
+          <div className="about-para-wrap">
+            <p className="about-body">
+              Today, I focus on designing user-centered experiences — drawing on
               my technical background to balance usability with real-world
               constraints.
             </p>
-            <p
-              className="about-quad__body"
-              style={{
-                marginTop: "1.25rem",
-                paddingLeft: "1.1rem",
-                borderLeft: "2px solid var(--primary-warm)",
-                fontFamily: "var(--font-serif)",
-                fontStyle: "italic",
-                fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
-                color: "var(--primary-warm)",
-                opacity: "0.n85",
-              }}
-            >
+            {/* <p className="about-pull">
               how users feel their way through a system matters just as much as
               how it works.
-            </p>
+            </p> */}
           </div>
-
-          {/* ── BR: Ripple anchor ── */}
-          <div
-            className="about-quad__today"
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              display: "flex",
-            }}
-          >
+          {/* 
+          <div className="about-ripple-wrap">
             <RippleAnchor />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
