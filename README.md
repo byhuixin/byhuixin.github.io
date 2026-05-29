@@ -14,12 +14,14 @@ This portfolio website is designed to showcase UX/UI design projects, case studi
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - A GitHub account
 - Basic knowledge of HTML/CSS (optional but helpful)
 
 ### Getting Started
 
 1. **Clone this repository**
+
    ```bash
    git clone https://github.com/butteredbagel/UX-Portfolio.git
    cd UX-Portfolio
@@ -61,6 +63,7 @@ UX-Portfolio/
 ## 🎯 Features to Implement
 
 ### Essential Features
+
 - [ ] Hero section with professional photo and tagline
 - [ ] About section highlighting UX/UI skills and experience
 - [ ] Portfolio grid showcasing 4-6 key projects
@@ -70,6 +73,7 @@ UX-Portfolio/
 - [ ] Download resume functionality
 
 ### Enhanced Features
+
 - [ ] Dark/light mode toggle
 - [ ] Smooth scrolling animations
 - [ ] Image gallery with lightbox
@@ -79,6 +83,7 @@ UX-Portfolio/
 - [ ] Social media integration
 
 ### Technical Features
+
 - [ ] SEO optimization with meta tags
 - [ ] Google Analytics integration
 - [ ] Performance optimization
@@ -94,6 +99,7 @@ UX-Portfolio/
    - Click "Save"
 
 2. **Your site will be available at:**
+
    ```
    https://butteredbagel.github.io/UX-Portfolio/
    ```
@@ -105,17 +111,20 @@ UX-Portfolio/
 ## 🎨 Customization Guide
 
 ### Colors and Branding
+
 - Update CSS variables in `css/style.css` for consistent theming
 - Replace favicon in root directory
 - Update meta tags for social media sharing
 
 ### Adding Projects
+
 1. Add project images to `images/portfolio/`
 2. Update portfolio grid in `portfolio.html`
 3. Create individual project pages in `projects/` folder
 4. Include case study format: Problem → Research → Solution → Results
 
 ### Content Guidelines
+
 - **Hero section**: Clear value proposition and what you do
 - **About**: Your design philosophy and background
 - **Portfolio**: 4-6 best projects with strong visuals
@@ -133,12 +142,14 @@ UX-Portfolio/
 ## 🔧 Tools and Technologies
 
 ### Recommended Tech Stack
+
 - **HTML5** - Semantic markup
 - **CSS3** - Modern styling and animations
 - **Vanilla JavaScript** - Interactive features
 - **GitHub Pages** - Free hosting
 
 ### Design Tools Integration
+
 - Export assets from Figma/Sketch in web-optimized formats
 - Use consistent naming conventions for design system
 - Maintain design tokens for colors, typography, spacing
@@ -146,6 +157,7 @@ UX-Portfolio/
 ## 📊 Analytics and Performance
 
 ### Recommended Integrations
+
 - **Google Analytics** - Track visitor behavior
 - **Google PageSpeed Insights** - Monitor performance
 - **Hotjar** - User experience analytics
@@ -167,6 +179,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 💬 Support
 
 If you have questions or need help customizing your portfolio:
+
 - Check the [Issues](https://github.com/butteredbagel/UX-Portfolio/issues) for common problems
 - Create a new issue for specific questions
 - Reach out on [LinkedIn](https://linkedin.com/in/yourprofile)
