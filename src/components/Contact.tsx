@@ -485,7 +485,7 @@ export const Contact = (): JSX.Element => {
             </p>
 
             <div className="contact-rows">
-              <a href="mailto:zh.huixinn@gmail.com" className="contact-row">
+              <a href="mailto:tyhadthye16@gmail.com" className="contact-row">
                 <div className="contact-row__icon" aria-hidden="true">
                   <svg
                     viewBox="0 0 24 24"
