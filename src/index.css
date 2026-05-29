@@ -500,25 +500,6 @@ p {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   DARK MODE
-══════════════════════════════════════════════════════════════════════════ */
-@media (prefers-color-scheme: dark) {
-  .about-hi,
-  .about-body,
-  .about-pull {
-    color: var(--neutral-warm-white);
-  }
-
-  .about-label {
-    color: var(--neutral-mid-grey);
-  }
-
-  .about-pull {
-    border-left-color: var(--neutral-mid-grey);
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
    CASE STUDY — SCROLL REVEAL
 ══════════════════════════════════════════════════════════════════════════ */
 .reveal {
